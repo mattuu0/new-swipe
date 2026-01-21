@@ -33,29 +33,25 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({ article, onClo
                     onClick={(e) => e.stopPropagation()}
                 >
                     {/* ヘッダー画像エリア */}
-                    <div className="relative h-72 shrink-0 group">
+                    <div className="relative h-60 shrink-0 group bg-gray-50 flex justify-center items-center">
                         <img
                             src={article.imageUrl}
                             alt={article.title}
-                            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                            className="max-w-xs sm:max-w-sm h-48 object-cover rounded-[32px] shadow-2xl transition-transform duration-1000 group-hover:scale-105"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-black/30" />
 
                         {/* 閉じるボタン */}
                         <button
                             onClick={onClose}
-                            className="absolute top-8 right-8 p-3 bg-black/30 backdrop-blur-md hover:bg-black/60 rounded-full text-white transition-all active:scale-90"
+                            className="absolute top-6 right-6 p-3 bg-white/80 backdrop-blur-md hover:bg-white rounded-full text-gray-900 shadow-lg transition-all active:scale-90 z-10"
                         >
                             <X size={20} />
                         </button>
 
                         {/* カテゴリタグ */}
-                        <div className="absolute bottom-8 left-8 flex items-center gap-3">
+                        <div className="absolute bottom-4 left-8 flex items-center gap-3">
                             <span className="px-4 py-2 bg-blue-600 text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-2xl shadow-xl shadow-blue-500/20">
                                 {article.category}
-                            </span>
-                            <span className="px-4 py-2 bg-white/90 backdrop-blur-sm text-gray-900 text-[10px] font-black rounded-2xl shadow-lg uppercase tracking-widest">
-                                #{article.tag}
                             </span>
                         </div>
                     </div>
