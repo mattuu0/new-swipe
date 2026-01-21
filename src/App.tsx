@@ -68,9 +68,6 @@ function App() {
           <h1 className="text-xl font-black bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent tracking-tighter">
             NewsMatch
           </h1>
-          <div className="flex gap-1">
-            <span className="text-[10px] font-bold bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full">PROTOTYPE</span>
-          </div>
         </div>
       </header>
 
