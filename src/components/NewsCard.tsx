@@ -24,9 +24,9 @@ export const NewsCard: React.FC<NewsCardProps> = ({ article, onSwipe, isFront, i
     const likeOpacity = useTransform(x, [50, 150], [0, 1]);
     const dislikeOpacity = useTransform(x, [-50, -150], [0, 1]);
 
-    // 重なり具合の調整（少し上に見えるように）
-    const scale = isFront ? 1 : 1 - (index * 0.04);
-    const yOffset = isFront ? 0 : index * -15;
+    // 重なり具合の調整（より上に見えるように）
+    const scale = isFront ? 1 : 1 - (index * 0.03);
+    const yOffset = isFront ? 0 : index * -25;
 
     const handleDragEnd = (_: any, info: PanInfo) => {
         if (info.offset.x > 100) {
