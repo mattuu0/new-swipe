@@ -73,7 +73,7 @@ function App() {
       <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 px-6 py-4" onClick={() => navigate('/')}>
         <div className="flex justify-between items-center w-full cursor-pointer">
           <h1 className="text-xl font-black bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent tracking-tighter">
-            NewsMatch
+            NewSwipe
           </h1>
         </div>
       </header>

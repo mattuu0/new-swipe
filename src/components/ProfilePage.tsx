@@ -25,7 +25,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ savedArticles }) => {
 
     const [profile, setProfile] = useState({
         name: userid === 'sample' ? 'サンプルユーザー' : (userid || 'ゲストユーザー'),
-        bio: '最新のテクノロジーとサイエンスに興味があります。AIが変える未来を NewsMatch で追いかけています。🔭💻 #Tech #Science #Future',
+        bio: '最新のテクノロジーとサイエンスに興味があります。AIが変える未来を NewSwipe で追いかけています。🔭💻 #Tech #Science #Future',
         location: '東京, 日本',
         website: `newsmatch.jp/profile?userid=${userid || 'sample'}`
     });
@@ -91,7 +91,6 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ savedArticles }) => {
                         </div>
 
                         <div className="flex items-center justify-center gap-3 mb-6">
-                            <p className="text-sm font-medium text-gray-400 italic">{profile.website}</p>
                             <button
                                 onClick={copyProfileLink}
                                 className={cn(
