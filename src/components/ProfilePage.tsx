@@ -38,7 +38,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ savedArticles }) => {
     };
 
     const copyProfileLink = () => {
-        const url = `https://mattuu.com/new-maching/profile?userid=${userid || 'sample'}`;
+        const url = `https://mattuu.com/new-maching/#/profile?userid=${userid || 'sample'}`;
         navigator.clipboard.writeText(url).then(() => {
             setIsCopied(true);
             setTimeout(() => setIsCopied(false), 2000);
