@@ -27,7 +27,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ savedArticles }) => {
         name: userid === 'sample' ? 'サンプルユーザー' : (userid || 'ゲストユーザー'),
         bio: '最新のテクノロジーとサイエンスに興味があります。AIが変える未来を NewSwipe で追いかけています。🔭💻 #Tech #Science #Future',
         location: '東京, 日本',
-        website: `newsmatch.jp/profile?userid=${userid || 'sample'}`
+        website: `newswipe.jp/profile?userid=${userid || 'sample'}`
     });
 
     const [tempProfile, setTempProfile] = useState({ ...profile });
