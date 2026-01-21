@@ -20,6 +20,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ savedArticles }) => {
     const [selectedArticle, setSelectedArticle] = useState<NewsArticle | null>(null);
     const [isEditing, setIsEditing] = useState(false);
     const [isCopied, setIsCopied] = useState(false);
+    const [selectedTag, setSelectedTag] = useState<string | null>(null);
 
     const [profile, setProfile] = useState({
         name: userid === 'sample' ? 'サンプルユーザー' : (userid || 'ゲストユーザー'),
@@ -42,6 +43,14 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ savedArticles }) => {
             setTimeout(() => setIsCopied(false), 2000);
         });
     };
+
+    // 全タグのリストを抽出
+    const allTags = Array.from(new Set(savedArticles.map(a => a.tag)));
+
+    // フィルタリング
+    const filteredArticles = savedArticles.filter(article =>
+        selectedTag ? article.tag === selectedTag : true
+    );
 
     return (
         <div className="flex flex-col h-full bg-gray-50 overflow-y-auto no-scrollbar pb-10">
@@ -66,7 +75,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ savedArticles }) => {
                         </div>
                     </div>
 
-                    <div className="mt-6 text-center w-full max-w-sm">
+                    <div className="mt-6 text-center w-full max-sm px-4">
                         <div className="flex items-center justify-center gap-2 mb-1">
                             <h2 className="text-3xl font-black text-gray-900 tracking-tight">{profile.name}</h2>
                             <button
@@ -94,7 +103,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ savedArticles }) => {
                             </button>
                         </div>
 
-                        <p className="text-gray-700 leading-relaxed font-medium bg-gray-50 p-4 rounded-2xl text-sm border border-gray-100 inline-block shadow-inner">
+                        <p className="text-gray-700 leading-relaxed font-medium bg-gray-50 p-4 rounded-2xl text-sm border border-gray-100 inline-block shadow-inner w-full">
                             {profile.bio}
                         </p>
                     </div>
@@ -112,19 +121,49 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ savedArticles }) => {
                 </div>
             </div>
 
-            {/* セクションタイトル */}
-            <div className="px-6 pt-10 pb-6">
-                <div className="flex items-center justify-between">
-                    <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">あなたのセレクト</h3>
+            {/* セクションタイトル & タグフィルター */}
+            <div className="px-6 pt-10 pb-4">
+                <div className="flex items-center justify-between mb-6">
+                    <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] shrink-0">あなたのセレクト</h3>
                     <div className="h-px bg-gray-200 flex-1 ml-4"></div>
                 </div>
+
+                {allTags.length > 0 && (
+                    <div className="flex gap-2 overflow-x-auto no-scrollbar pb-2">
+                        <button
+                            onClick={() => setSelectedTag(null)}
+                            className={cn(
+                                "px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all border",
+                                selectedTag === null
+                                    ? "bg-gray-900 border-gray-900 text-white"
+                                    : "bg-white border-gray-200 text-gray-400"
+                            )}
+                        >
+                            All
+                        </button>
+                        {allTags.map(tag => (
+                            <button
+                                key={tag}
+                                onClick={() => setSelectedTag(tag)}
+                                className={cn(
+                                    "px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all border",
+                                    selectedTag === tag
+                                        ? "bg-indigo-600 border-indigo-600 text-white"
+                                        : "bg-white border-gray-200 text-gray-400"
+                                )}
+                            >
+                                #{tag}
+                            </button>
+                        ))}
+                    </div>
+                )}
             </div>
 
             {/* ニュースリスト */}
             <div className="px-6 pb-20">
-                {savedArticles.length > 0 ? (
+                {filteredArticles.length > 0 ? (
                     <div className="grid grid-cols-1 gap-6">
-                        {savedArticles.map(article => (
+                        {filteredArticles.map(article => (
                             <motion.div
                                 whileHover={{ y: -4 }}
                                 whileTap={{ scale: 0.98 }}
@@ -156,8 +195,8 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({ savedArticles }) => {
                         <div className="bg-gray-50 p-6 rounded-full inline-block mb-4 text-gray-300">
                             <Bookmark size={40} />
                         </div>
-                        <h3 className="text-lg font-bold text-gray-400">まだ記事がありません</h3>
-                        <p className="text-xs text-gray-400 mt-1 uppercase tracking-widest font-black">Swipe to add articles</p>
+                        <h3 className="text-lg font-bold text-gray-400">記事が見つかりません</h3>
+                        <p className="text-xs text-gray-400 mt-1 uppercase tracking-widest font-black">No articles match this tag</p>
                     </div>
                 )}
             </div>
